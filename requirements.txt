@@ -1,3 +1,4 @@
 podcastfy
 uvicorn
 fastapi
+PyAudio
