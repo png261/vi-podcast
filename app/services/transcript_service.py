@@ -1,7 +1,6 @@
-from app.schemas import TranscriptInput, Line, TranscriptOutput
-from abc import ABC, abstractmethod
-from typing import List, ClassVar, Tuple
 import re
+from app.schemas import TranscriptInput, Line, TranscriptOutput
+from typing import List, Tuple
 from podcastfy.client import generate_podcast
 
 
@@ -90,7 +89,7 @@ def generate_transcript(data: TranscriptInput) -> TranscriptOutput:
     config = {
         'word_count': 500,
         'conversation_style': ['Fun', 'Playful', 'Curious', 'Educational'],
-        'roles_person1': 'Friendly Host',  # Thân thiện, gần gũi
+        'roles_person1': 'Friendly Host',
         'roles_person2': 'Knowledgeable Friend',
         'dialogue_structure': [
             'Warm Welcome',
