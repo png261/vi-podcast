@@ -15,14 +15,19 @@
 
 3. **Set up Environment Variables:**
 
-   This project requires a Gemini API key.  
    Create a `.env` file in the project root with the following content:
 
    ```
-   GEMINI_API_KEY=your_gemini_api_key_here
+   GEMINI_API_KEY=
+   R2_ENDPOINT_URL=
+   R2_ACCESS_KEY_ID=
+   R2_SECRET_ACCESS_KEY=
+   R2_BUCKET_NAME=
+   R2_REGION=
+   BASE_URL_S3=
+
    ```
 
-   Replace `your_gemini_api_key_here` with your actual Gemini API key.
 
 4. **Run the application:**
    ```sh
