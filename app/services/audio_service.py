@@ -3,6 +3,7 @@ import uuid
 from datetime import datetime
 from app.schemas import AudioInput, AudioOutput, AudioFile
 from podcastfy.text_to_speech import TextToSpeech
+from app.services.storage_service import upload_file
 
 
 def generate_audio(data: AudioInput) -> AudioOutput:
@@ -20,12 +21,13 @@ def generate_audio(data: AudioInput) -> AudioOutput:
     temp_dir = os.path.join("data/audio", unique_folder_name)
     os.makedirs(temp_dir, exist_ok=True)
 
-    audio_paths = []
+    audio_files = []
     provider_config = text_to_speech._get_provider_config()
 
     for line in data.transcript:
-        temp_file = os.path.join(temp_dir, f"{line.id}_speaker{
-                                 line.speaker_id}.mp3")
+        filename = f"{line.id}_speaker{
+            line.speaker_id}.mp3"
+        temp_file = os.path.join(temp_dir, filename)
         voice = data.voice_map.get(line.speaker_id)
         model = provider_config.get("model")
 
@@ -33,8 +35,9 @@ def generate_audio(data: AudioInput) -> AudioOutput:
             line.text, voice, model)
         with open(temp_file, "wb") as f:
             f.write(audio_data)
-        audio_paths.append(temp_file)
+        r2_key = f"vipodcast/{unique_folder_name}/{filename}"
+        r2_url = upload_file(audio_data, r2_key)
 
-    audio_files = [AudioFile(id=str(idx), url=path)
-                   for idx, path in enumerate(audio_paths)]
+        audio_files.append(AudioFile(id=str(line.id), url=r2_url))
+
     return AudioOutput(audio_files=audio_files)
