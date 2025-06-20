@@ -40,5 +40,7 @@ class AudioFile(BaseModel):
 
 
 class AudioOutput(BaseModel):
-    audio_files: List[AudioFile] = Field(...,
-                                         description="List of generated audio files.")
+    podcast_id: str
+    transcript_url: str
+    audio_urls: List[AudioFile] = Field(...,
+                                        description="List of generated audio files.")

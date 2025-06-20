@@ -45,7 +45,6 @@
     "text": "Your podcast topic content here.",
     "image_urls": [],
     "source_urls": [],
-    "language": "vi"
   }
   ```
 - **Response Example:**
@@ -77,6 +76,8 @@
 - **Response Example:**
   ```json
   {
+    podcast_id: "20250619102000_abcd1234", 
+    transcript_url: "data/audio/20250619102000_abcd1234/transcript.txt", 
     "audio_files": [
       { "id": "0", "url": "data/audio/20250619102000_abcd1234/0_speaker1.mp3" },
       { "id": "1", "url": "data/audio/20250619102000_abcd1234/1_speaker2.mp3" }
